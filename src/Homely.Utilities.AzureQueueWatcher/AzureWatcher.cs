@@ -19,12 +19,12 @@ namespace Homely.Utilities.AzureQueueWatcher
         {
             if (string.IsNullOrWhiteSpace(azureConnectionString))
             {
-                throw new ArgumentException("message", nameof(azureConnectionString));
+                throw new ArgumentException(nameof(azureConnectionString));
             }
 
             if (string.IsNullOrWhiteSpace(queueName))
             {
-                throw new ArgumentException("message", nameof(queueName));
+                throw new ArgumentException(nameof(queueName));
             }
 
             _azureConnectionString = azureConnectionString;
@@ -40,8 +40,7 @@ namespace Homely.Utilities.AzureQueueWatcher
 
         private async Task<int> GetQueueSizeAsync()
         {
-            await _queue.FetchAttributesAsync()
-                        .ConfigureAwait(false);
+            await _queue.FetchAttributesAsync();
             return (int)_queue.ApproximateMessageCount;
         }
 
@@ -59,12 +58,11 @@ namespace Homely.Utilities.AzureQueueWatcher
                 {
                     Console.WriteLine();
 
-                    await WatchAsync().ConfigureAwait(false);
+                    await WatchAsync();
 
                     Console.WriteLine();
 
-                    await Task.Delay(5000)
-                              .ConfigureAwait(false);
+                    await Task.Delay(5000);
                 }
             }
             catch (Exception exception)
@@ -75,7 +73,7 @@ namespace Homely.Utilities.AzureQueueWatcher
 
         private async Task WatchAsync()
         {
-            _queueCount = await GetQueueSizeAsync().ConfigureAwait(false);
+            _queueCount = await GetQueueSizeAsync();
 
             if (_queueCount > 0)
             {

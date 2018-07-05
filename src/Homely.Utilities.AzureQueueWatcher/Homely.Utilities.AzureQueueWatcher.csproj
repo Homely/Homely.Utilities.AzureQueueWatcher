@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RuntimeIdentifiers>win81-x64;win81-x86;win81-arm</RuntimeIdentifiers>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
