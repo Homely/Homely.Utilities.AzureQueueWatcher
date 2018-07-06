@@ -11,3 +11,14 @@ This "ETA" might change depending on the instances running, so you can use this 
 
 ## Screenshot:
 ![Imgur](https://i.imgur.com/ZWInkcQ.png)
+
+## How to run
+# Docker (public DockerHub image coming soon!)
+```
+docker build . -t azure-queue-watcher
+docker run -e "AZURE_CONNECTION_STRING=<your-connection-string>" -e "AZURE_QUEUE_NAME=<your-queue-name>" azure-queue-watcher
+```
+
+# Windows
+1. Edit the `appSettings.json` file with the correct variables.
+2. Run the app!

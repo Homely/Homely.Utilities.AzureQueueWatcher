@@ -8,14 +8,14 @@ namespace Homely.Utilities.AzureQueueWatcher
     {
         private static async Task Main(string[] args)
         {
-            var builder = new ConfigurationBuilder()
+            var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appSettings.json");
+                .AddJsonFile("appSettings.json", true)
+                .AddEnvironmentVariables()
+                .Build();
 
-            var configuration = builder.Build();
-            var azure = configuration.GetSection("azure");
-            var azureConnectionString = azure["connectionString"];
-            var azureQueueName = azure["queueName"];
+            var azureConnectionString = configuration.GetSection("AZURE_CONNECTION_STRING").Value;
+            var azureQueueName = configuration.GetSection("AZURE_QUEUE_NAME").Value;
 
             var watcher = new AzureWatcher(azureConnectionString, azureQueueName);
             await watcher.DoWorkAsync();
